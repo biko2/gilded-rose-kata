@@ -75,19 +75,23 @@ const updateQuality2 = (item: Item): void => {
     return;
   }
 
-  if (item.sellIn < 0) {
-    if (item.name === "Aged Brie") {
+  if (item.name === "Aged Brie") {
+    if (item.sellIn < 0) {
       if (item.quality < 50) {
         item.quality = item.quality + 1;
       }
-      return;
     }
+    return;
+  }
 
-    if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
+  if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
+    if (item.sellIn < 0) {
       item.quality = item.quality - item.quality;
-      return;
     }
+    return;
+  }
 
+  if (item.sellIn < 0) {
     if (item.quality > 0) {
       item.quality = item.quality - 1;
     }
