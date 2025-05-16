@@ -105,14 +105,14 @@ export class GildedRose {
 
   updateQuality() {
     this.items.forEach((item) => {
-      const strategy = this.createStrategyFor(item);
+      const strategy = this.createItemStrategy(item);
       strategy.update();
     });
 
     return this.items;
   }
 
-  private createStrategyFor(item: Item): ItemStrategy {
+  private createItemStrategy(item: Item): ItemStrategy {
     if (item.name === "Sulfuras, Hand of Ragnaros") {
       return new SulfurasStrategy(item);
     }
