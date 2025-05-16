@@ -17,7 +17,7 @@ export class GildedRose {
     this.items.forEach((item) => {
       updateQuality1(item);
       updateSellIn(item);
-      updateQualityAfterExpiration(item);
+      updateQuality2(item);
     });
 
     return this.items;
@@ -70,7 +70,7 @@ const updateSellIn = (item: Item): void => {
   item.sellIn = item.sellIn - 1;
 };
 
-const updateQualityAfterExpiration = (item: Item): void => {
+const updateQuality2 = (item: Item): void => {
   if (item.sellIn < 0) {
     if (item.name != "Aged Brie") {
       if (item.name != "Backstage passes to a TAFKAL80ETC concert") {
