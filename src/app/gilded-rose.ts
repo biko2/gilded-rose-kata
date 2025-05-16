@@ -54,9 +54,11 @@ const updateQuality1 = (item: Item): void => {
 };
 
 const updateSellIn = (item: Item): void => {
-  if (item.name != "Sulfuras, Hand of Ragnaros") {
-    item.sellIn = item.sellIn - 1;
+  if (item.name === "Sulfuras, Hand of Ragnaros") {
+    return;
   }
+
+  item.sellIn = item.sellIn - 1;
 };
 
 const updateQualityAfterExpiration = (item: Item): void => {
