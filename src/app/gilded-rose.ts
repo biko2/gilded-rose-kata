@@ -4,7 +4,7 @@ import {
   AgedBrieStrategy,
   BackstagePassStrategy,
   CommonItemStrategy,
-} from "./strategies";
+} from "./strategies/item";
 
 export class Item {
   constructor(

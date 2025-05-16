@@ -1,4 +1,4 @@
-import { Item } from "../gilded-rose";
+import { Item } from "../../gilded-rose";
 
 export abstract class ItemStrategy {
   protected item: Item;

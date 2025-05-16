@@ -1,4 +1,4 @@
-import { ItemStrategy } from "../item-strategy";
+import { ItemStrategy } from "./strategy";
 
 export class SulfurasStrategy extends ItemStrategy {
   update(): void {
