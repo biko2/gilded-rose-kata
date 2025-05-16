@@ -55,9 +55,11 @@ const updateQuality1 = (item: Item): void => {
     return;
   }
 
-  if (item.quality > 0) {
-    item.quality = item.quality - 1;
+  if (item.quality <= 0) {
+    return;
   }
+
+  item.quality = item.quality - 1;
 };
 
 const updateSellIn = (item: Item): void => {
