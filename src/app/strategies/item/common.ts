@@ -1,4 +1,4 @@
-import { ItemStrategy } from "./strategy";
+import { ItemStrategy } from "./_strategy";
 
 export class CommonItemStrategy extends ItemStrategy {
   update(): void {

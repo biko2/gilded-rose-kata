@@ -1,5 +1,5 @@
 import { Item } from "../../gilded-rose";
-import { ItemStrategy } from "./strategy";
+import { ItemStrategy } from "./_strategy";
 import { SulfurasStrategy } from "./sulfuras";
 import { AgedBrieStrategy } from "./aged-brie";
 import { BackstagePassStrategy } from "./backstage-pass";

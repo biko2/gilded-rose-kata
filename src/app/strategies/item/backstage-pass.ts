@@ -1,4 +1,4 @@
-import { ItemStrategy } from "./strategy";
+import { ItemStrategy } from "./_strategy";
 
 export class BackstagePassStrategy extends ItemStrategy {
   update(): void {
