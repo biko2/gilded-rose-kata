@@ -41,6 +41,48 @@ export abstract class ItemStrategy {
   }
 }
 
+export class SulfurasStrategy extends ItemStrategy {
+  update(): void {
+    // Sulfuras is legendary and never changes
+  }
+}
+
+export class AgedBrieStrategy extends ItemStrategy {
+  update(): void {
+    this.decreaseSellIn();
+    this.increaseQuality();
+
+    if (this.hasExpired()) {
+      this.increaseQuality();
+    }
+
+    this.ensureQualityInRange();
+  }
+}
+
+export class BackstagePassStrategy extends ItemStrategy {
+  update(): void {
+    this.decreaseSellIn();
+
+    if (this.hasExpired()) {
+      this.item.quality = 0;
+      return;
+    }
+
+    this.increaseQuality();
+
+    if (this.item.sellIn < 10) {
+      this.increaseQuality();
+    }
+
+    if (this.item.sellIn < 5) {
+      this.increaseQuality();
+    }
+
+    this.ensureQualityInRange();
+  }
+}
+
 export class CommonItemStrategy extends ItemStrategy {
   update(): void {
     this.decreaseSellIn();
@@ -63,83 +105,23 @@ export class GildedRose {
 
   updateQuality() {
     this.items.forEach((item) => {
-      if (item.name === "Sulfuras, Hand of Ragnaros") {
-        return;
-      }
-
-      if (item.name === "Aged Brie") {
-        this.decreaseSellIn(item);
-
-        this.increaseQuality(item);
-
-        if (this.hasExpired(item)) {
-          this.increaseQuality(item);
-        }
-
-        this.ensureQualityInRange(item);
-
-        return;
-      }
-
-      if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
-        this.decreaseSellIn(item);
-
-        if (this.hasExpired(item)) {
-          item.quality = 0;
-          return;
-        }
-
-        this.increaseQuality(item);
-
-        if (item.sellIn < 10) {
-          this.increaseQuality(item);
-        }
-
-        if (item.sellIn < 5) {
-          this.increaseQuality(item);
-        }
-
-        this.ensureQualityInRange(item);
-
-        return;
-      }
-
-      this.decreaseSellIn(item);
-
-      this.decreaseQuality(item);
-
-      if (this.hasExpired(item)) {
-        this.decreaseQuality(item);
-      }
-
-      this.ensureQualityInRange(item);
+      const strategy = this.createStrategyFor(item);
+      strategy.update();
     });
 
     return this.items;
   }
 
-  private ensureQualityInRange(item: Item): void {
-    if (item.quality > 50) {
-      item.quality = 50;
+  private createStrategyFor(item: Item): ItemStrategy {
+    if (item.name === "Sulfuras, Hand of Ragnaros") {
+      return new SulfurasStrategy(item);
     }
-    if (item.quality < 0) {
-      item.quality = 0;
+    if (item.name === "Aged Brie") {
+      return new AgedBrieStrategy(item);
     }
-  }
-
-  private decreaseSellIn(item: Item): void {
-    item.sellIn = item.sellIn - 1;
-  }
-
-  private increaseQuality(item: Item): void {
-    item.quality = item.quality + 1;
-  }
-
-  private decreaseQuality(item: Item): void {
-    item.quality = item.quality - 1;
-  }
-
-  private hasExpired(item: Item): boolean {
-    return item.sellIn < 0;
+    if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
+      return new BackstagePassStrategy(item);
+    }
+    return new CommonItemStrategy(item);
   }
 }
