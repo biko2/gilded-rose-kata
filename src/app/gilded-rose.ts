@@ -24,7 +24,7 @@ export class GildedRose {
 
         this.increaseQuality(item);
 
-        if (item.sellIn < 0) {
+        if (this.hasExpired(item)) {
           this.increaseQuality(item);
         }
 
@@ -36,7 +36,7 @@ export class GildedRose {
       if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
         this.decreaseSellIn(item);
 
-        if (item.sellIn < 0) {
+        if (this.hasExpired(item)) {
           item.quality = 0;
           return;
         }
@@ -60,7 +60,7 @@ export class GildedRose {
 
       this.decreaseQuality(item);
 
-      if (item.sellIn < 0) {
+      if (this.hasExpired(item)) {
         this.decreaseQuality(item);
       }
 
@@ -89,5 +89,9 @@ export class GildedRose {
 
   private decreaseQuality(item: Item): void {
     item.quality = item.quality - 1;
+  }
+
+  private hasExpired(item: Item): boolean {
+    return item.sellIn < 0;
   }
 }
