@@ -20,7 +20,7 @@ export class GildedRose {
       }
 
       if (item.name === "Aged Brie") {
-        item.sellIn = item.sellIn - 1;
+        this.decreaseSellIn(item);
 
         item.quality = item.quality + 1;
 
@@ -34,7 +34,7 @@ export class GildedRose {
       }
 
       if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
-        item.sellIn = item.sellIn - 1;
+        this.decreaseSellIn(item);
 
         if (item.sellIn < 0) {
           item.quality = 0;
@@ -56,7 +56,7 @@ export class GildedRose {
         return;
       }
 
-      item.sellIn = item.sellIn - 1;
+      this.decreaseSellIn(item);
 
       item.quality = item.quality - 1;
 
@@ -77,5 +77,9 @@ export class GildedRose {
     if (item.quality < 0) {
       item.quality = 0;
     }
+  }
+
+  private decreaseSellIn(item: Item): void {
+    item.sellIn = item.sellIn - 1;
   }
 }
