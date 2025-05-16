@@ -7,11 +7,7 @@ export class Item {
 }
 
 export abstract class ItemStrategy {
-  protected item: Item;
-
-  constructor(item: Item) {
-    this.item = item;
-  }
+  constructor(protected item: Item) {}
 
   abstract update(): void;
 
