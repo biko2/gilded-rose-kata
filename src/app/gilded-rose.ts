@@ -58,10 +58,10 @@ export class GildedRose {
 
       this.decreaseSellIn(item);
 
-      item.quality = item.quality - 1;
+      this.decreaseQuality(item);
 
       if (item.sellIn < 0) {
-        item.quality = item.quality - 1;
+        this.decreaseQuality(item);
       }
 
       this.ensureQualityInRange(item);
@@ -85,5 +85,9 @@ export class GildedRose {
 
   private increaseQuality(item: Item): void {
     item.quality = item.quality + 1;
+  }
+
+  private decreaseQuality(item: Item): void {
+    item.quality = item.quality - 1;
   }
 }
