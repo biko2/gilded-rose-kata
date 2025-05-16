@@ -28,9 +28,7 @@ export class GildedRose {
           item.quality = item.quality + 1;
         }
 
-        if (item.quality > 50) {
-          item.quality = 50;
-        }
+        this.ensureQualityInRange(item);
 
         return;
       }
@@ -53,9 +51,7 @@ export class GildedRose {
           item.quality = item.quality + 1;
         }
 
-        if (item.quality > 50) {
-          item.quality = 50;
-        }
+        this.ensureQualityInRange(item);
 
         return;
       }
@@ -68,11 +64,18 @@ export class GildedRose {
         item.quality = item.quality - 1;
       }
 
-      if (item.quality < 0) {
-        item.quality = 0;
-      }
+      this.ensureQualityInRange(item);
     });
 
     return this.items;
+  }
+
+  private ensureQualityInRange(item: Item): void {
+    if (item.quality > 50) {
+      item.quality = 50;
+    }
+    if (item.quality < 0) {
+      item.quality = 0;
+    }
   }
 }
