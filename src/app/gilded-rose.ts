@@ -22,10 +22,10 @@ export class GildedRose {
       if (item.name === "Aged Brie") {
         this.decreaseSellIn(item);
 
-        item.quality = item.quality + 1;
+        this.increaseQuality(item);
 
         if (item.sellIn < 0) {
-          item.quality = item.quality + 1;
+          this.increaseQuality(item);
         }
 
         this.ensureQualityInRange(item);
@@ -41,14 +41,14 @@ export class GildedRose {
           return;
         }
 
-        item.quality = item.quality + 1;
+        this.increaseQuality(item);
 
         if (item.sellIn < 10) {
-          item.quality = item.quality + 1;
+          this.increaseQuality(item);
         }
 
         if (item.sellIn < 5) {
-          item.quality = item.quality + 1;
+          this.increaseQuality(item);
         }
 
         this.ensureQualityInRange(item);
@@ -81,5 +81,9 @@ export class GildedRose {
 
   private decreaseSellIn(item: Item): void {
     item.sellIn = item.sellIn - 1;
+  }
+
+  private increaseQuality(item: Item): void {
+    item.quality = item.quality + 1;
   }
 }
