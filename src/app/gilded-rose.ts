@@ -1,4 +1,4 @@
-import { createItemStrategy } from "./strategies/item";
+import { createItemStrategy } from "./item";
 
 export class Item {
   constructor(
