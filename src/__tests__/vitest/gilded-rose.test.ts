@@ -130,6 +130,43 @@ describe("Gilded Rose", () => {
     });
   });
 
+  describe("Conjured", () => {
+    const itemName = "Conjured Mana Cake";
+
+    describe("SellIn", () => {
+      it("it downgrades 1 point per day", () => {
+        const item = updateGildedRoseWithOneItem(itemName, 1, 1);
+        expect(item.sellIn).toBe(0);
+      });
+    });
+
+    describe("Quality", () => {
+      it("it downgrades 2 points per day", () => {
+        const item = updateGildedRoseWithOneItem(itemName, 1, 2);
+        expect(item.quality).toBe(0);
+
+        const item2 = updateGildedRoseWithOneItem(itemName, 1, 50);
+        expect(item2.quality).toBe(48);
+      });
+
+      it("if sellIn date has expired it downgrades 4 points per day (twice)", () => {
+        const item = updateGildedRoseWithOneItem(itemName, 0, 12);
+        expect(item.quality).toBe(8);
+      });
+
+      it("it can never be negative", () => {
+        const item = updateGildedRoseWithOneItem(itemName, 3, 0);
+        expect(item.quality).toBe(0);
+
+        const item2 = updateGildedRoseWithOneItem(itemName, 3, 1);
+        expect(item2.quality).toBe(0);
+
+        const item3 = updateGildedRoseWithOneItem(itemName, 0, 3);
+        expect(item3.quality).toBe(0);
+      });
+    });
+  });
+
   it("updates correctly after 2 days", () => {
     const gildedRose = new GildedRose([
       new Item("Elixir of the Mongoose", 4, 10),
