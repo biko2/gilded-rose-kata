@@ -123,6 +123,15 @@ describe("Gilded Rose", () => {
       });
     });
   });
+
+  it("updates correctly after 2 days", () => {
+    const gildedRose = new GildedRose([
+      new Item("Elixir of the Mongoose", 4, 10),
+    ]);
+    gildedRose.updateQuality();
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).toBe(8);
+  });
 });
 
 const updateGildedRoseWithOneItem = (
