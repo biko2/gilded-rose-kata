@@ -26,8 +26,11 @@ describe("Gilded Rose", () => {
       });
 
       it("it can never be negative", () => {
-        const item = updateGildedRoseWithOneItem(itemName, 0, 0);
+        const item = updateGildedRoseWithOneItem(itemName, 3, 0);
         expect(item.quality).toBe(0);
+
+        const item2 = updateGildedRoseWithOneItem(itemName, 0, 1);
+        expect(item2.quality).toBe(0);
       });
     });
   });
@@ -54,8 +57,11 @@ describe("Gilded Rose", () => {
       });
 
       it("it has limit of 50 points", () => {
-        const item = updateGildedRoseWithOneItem(itemName, 1, 50);
+        const item = updateGildedRoseWithOneItem(itemName, 3, 50);
         expect(item.quality).toBe(50);
+
+        const item2 = updateGildedRoseWithOneItem(itemName, 0, 49);
+        expect(item2.quality).toBe(50);
       });
     });
   });
